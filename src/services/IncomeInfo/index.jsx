@@ -1,22 +1,22 @@
 import { useState, createContext, useEffect, useContext } from 'react';
-import { getIncomeData, getIncomePercentage } from '../DataService/index.jsx';
+import { getIncomeData, getIncomePercentage, getBillData } from '../DataService/index.jsx';
 //import PieChart from './pieChart.js';
 import CountUpNumber from '../../components/CountUpNumber/countUp.jsx';
 import { currentMonthNumber, currentYear } from '../DateService/index.jsx';
+import DefaultCharts from '../../utils/defaulCharts.jsx';
 
 export const ContextIncomeInfo = createContext()
 export default function IncomeInfoProvider({ children }) {
-    const [mainIncome, updateMainIncome] = useState(100000)
-    const [income, updateIncome] = useState(500000)
-    const [totalIncomeByType, updateTotalIncomeByType] = useState(null)
-    const [bill, updateBill] = useState(400000)
-    const [totalBillByType, updateTotalBillByType] = useState(null)
-    const [percentageIncome, updatePercentageIncome]= useState(50)
+    const [mainIncome, updateMainIncome] = useState(4999)
+    const [income, updateIncome] = useState(4999)
+    const [totalIncomeByType, updateTotalIncomeByType] = useState(DefaultCharts)
+    const [bill, updateBill] = useState(4999)
+    const [totalBillByType, updateTotalBillByType] = useState(DefaultCharts)
+    const [percentageIncome, updatePercentageIncome]= useState(100)
     useEffect(() => {
-        console.log(currentMonthNumber)
         initMainIncomeAndPercentage()
         initTotalIncome()
-        //initTotalBill()
+        initTotalBill() 
     }, [])// Run only once Rest API
 
     function initTotalIncome() {
@@ -44,10 +44,9 @@ export default function IncomeInfoProvider({ children }) {
         //Update total income above the percentage income
         updateMainIncome(totalIncome)
         updatePercentageIncome(incomePercentage)
-        //ToDo update percentage bar 
     }
 
-    function updateTotalIncomeData({ totalIncomes, totalIncomeByTypes }) { //ToDo: add Parameter 
+    function updateTotalIncomeData({ totalIncomes, totalIncomeByTypes }) { 
         //counter in income tab and chart in 
         updateIncome(totalIncomes)
         updateTotalIncomeByType(extractTotalWithEachType(totalIncomeByTypes))

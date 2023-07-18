@@ -5,12 +5,13 @@ import AppHeader from "./Header";
 import DonateBtn from "./PayPalButton";
 import IncomeInfoProvider from "../services/IncomeInfo";
 import WebSocketHandler from "../services/WebSocketHandler";
-import IncomeInfoConsumer from "./incomeInfoConsumer";
-import BillInfoConsumer from "./billInfoConsumer";
-import PercentageInfoConsumer from "./percentageInfoConsumer";
+import IncomeInfoConsumer from "./consumers/incomeInfoConsumer";
+import BillInfoConsumer from "./consumers/billInfoConsumer";
+import PercentageInfoConsumer from "./consumers/percentageInfoConsumer";
 const Components = () => {
     return (
         <IncomeInfoProvider>
+        <WebSocketHandler></WebSocketHandler>
             <Box bgcolor="white" height={"100vh"}  >
                 <AppHeader />
                 
@@ -22,7 +23,6 @@ const Components = () => {
 
                     <Box sx={{ marginBottom: "1.5rem", height: "50%", display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 1 }}>
                         <Box sx={{ p: 1, boxShadow: 3, bgcolor: "white" }}>Income
-                            <WebSocketHandler></WebSocketHandler>
                             <IncomeInfoConsumer></IncomeInfoConsumer>
                         </Box>
 
